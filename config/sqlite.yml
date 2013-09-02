@@ -1,0 +1,20 @@
+Default: &defaults
+  database: plotter.sqlite3
+  poolsize: 10
+
+Development:
+  <<: *defaults
+
+Testing:
+  database: plotter_test.sqlite3
+  <<: *defaults
+
+Staging:
+  database: plotter_staging.sqlite3
+  poolsize: 100
+  <<: *defaults
+
+Production:
+  database: plotter_production.sqlite3
+  poolsize: 100
+  <<: *defaults
