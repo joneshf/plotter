@@ -5,3 +5,5 @@
 /robots.txt RobotsR GET
 
 / HomeR GET POST
+/plot PlotFormR GET POST
+/plot/#PlotId PlotR GET DELETE

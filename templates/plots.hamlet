@@ -1,0 +1,4 @@
+<form method=post enctype=#{enctype}>
+  ^{plotWidget}
+  <div>
+    <input type=submit value="Create a new plot">

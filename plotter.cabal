@@ -20,6 +20,7 @@ library
                      Settings.StaticFiles
                      Settings.Development
                      Handler.Home
+                     Handler.Plot
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT
@@ -70,6 +71,8 @@ library
                  , conduit                       >= 1.0
                  , monad-logger                  >= 0.3
                  , fast-logger                   >= 0.3
+                 , easyplot                      >= 1.0
+                 , uuid                          >= 1.2
 
 executable         plotter
     if flag(library-only)
