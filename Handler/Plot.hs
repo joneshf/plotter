@@ -21,6 +21,8 @@ postPlotFormR = do
             newUUID <- liftIO $ V4.nextRandom
             let filename = makeFilename $ U.toString newUUID
             setMessage "Generating plot"
+            _ <- ($) liftIO $ putStrLn "Raw Data"
+            _ <- ($) liftIO $ putStrLn $ T.unpack $ unTextarea (plotDataData plot)
             _ <- ($) liftIO $ makePlot filename $ plotDataData plot
             plotId <- runDB $ insert $ Plot (T.pack filename)
             redirect $ PlotR plotId
@@ -29,7 +31,12 @@ postPlotFormR = do
             $(widgetFile "plots")
 
 getPlotR :: PlotId -> Handler Html
-getPlotR = error "Not yet implemented: getPlotR"
+getPlotR plotId = do
+    plot <- runDB $ get404 plotId
+    let filename = "/" <> plotFilename plot
+    defaultLayout $ do
+        setTitle "Plot!!!"
+        $(widgetFile "plot")
 
 deletePlotR :: PlotId -> Handler Html
 deletePlotR = error "Not yet implemented: deletePlotR"
@@ -42,7 +49,7 @@ makePlot filename rawData =
     EP.plot (EP.PNG filename) $ rawToFloats rawData
 
 makeFilename :: String -> String
-makeFilename uuid = "media/plots/" <> uuid <> ".png"
+makeFilename uuid = "static/img/plots/" <> uuid <> ".png"
 
 rawToFloats :: Textarea -> [(Float,Float)]
 rawToFloats =
