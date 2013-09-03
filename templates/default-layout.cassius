@@ -1,0 +1,6 @@
+@font-face
+  font-family: "SourceSans"
+  src: url(@{StaticR fonts_SourceSansPro-Regular_ttf})
+
+body
+  font-family: "SourceSans"

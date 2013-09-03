@@ -11,6 +11,7 @@ getPlotFormR :: Handler Html
 getPlotFormR = do
     (plotWidget,enctype) <- generateFormPost plotForm
     defaultLayout $ do
+        setTitle "Plotter"
         $(widgetFile "plots")
 
 postPlotFormR :: Handler Html
@@ -21,8 +22,6 @@ postPlotFormR = do
             newUUID <- liftIO $ V4.nextRandom
             let filename = makeFilename $ U.toString newUUID
             setMessage "Generating plot"
-            _ <- ($) liftIO $ putStrLn "Raw Data"
-            _ <- ($) liftIO $ putStrLn $ T.unpack $ unTextarea (plotDataData plot)
             _ <- ($) liftIO $ makePlot filename $ plotDataData plot
             plotId <- runDB $ insert $ Plot (T.pack filename)
             redirect $ PlotR plotId
@@ -41,7 +40,9 @@ getPlotR plotId = do
 deletePlotR :: PlotId -> Handler Html
 deletePlotR = error "Not yet implemented: deletePlotR"
 
-plotForm :: Html -> MForm (HandlerT App IO) (FormResult PlotData, WidgetT (HandlerSite (HandlerT App IO)) IO ())
+plotForm :: Html -> MForm (HandlerT App IO)
+                          (FormResult PlotData,
+                           WidgetT (HandlerSite (HandlerT App IO)) IO ())
 plotForm = renderDivs $ PlotData <$> areq textareaField "Data" Nothing
 
 makePlot :: String -> Textarea -> IO Bool

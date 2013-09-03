@@ -1,3 +1,5 @@
+<h1>Plotter
+
 $maybe msg <- mmsg
     <div #message>#{msg}
 ^{widget}

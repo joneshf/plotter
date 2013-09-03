@@ -21,7 +21,6 @@ import System.Log.FastLogger (mkLogger)
 
 -- Import all relevant handler modules here.
 -- Don't forget to add new modules to your cabal file!
-import Handler.Home
 import Handler.Plot
 
 -- This line actually creates our YesodDispatch instance. It is the second half

@@ -1,0 +1,19 @@
+@font-face {
+  font-family: "SourceSans";
+  src: url("/static/fonts/SourceSansPro-Regular.ttf");
+}
+
+body {
+  background: #EEE;
+  color: #444;
+  font-family: "SourceSans";
+  font-size: 30px;
+  text-shadow: 1px 1px 1px #FFF;
+}
+
+form.data {
+  textarea {
+    height: 250px;
+    width: 640px;
+  }
+}
